@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Lineage Cartographer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Landing Page -->
+        <div id="landing-page" class="page active">
+            <div class="starfield"></div>
+            <div class="container">
+                <header class="header">
+                    <h1 class="title">
+                        <span class="title-main">Data Lineage</span>
+                        <span class="title-sub">Cartographer</span>
+                    </h1>
+                    <p class="subtitle">Navigate the constellations of your data warehouse</p>
+                </header>
+                
+                <div class="query-input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="sql-query" 
+                            placeholder="Paste your SQL query to map its journey..."
+                            rows="12"
+                        ></textarea>
+                        <div class="input-glow"></div>
+                    </div>
+                    <button id="visualize-btn" class="visualize-btn">
+                        <span class="btn-text">Visualize</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualization Page -->
+        <div id="visualization-page" class="page">
+            <div class="viz-header">
+                <button id="back-btn" class="back-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                </button>
+                
+                <div class="view-toggle">
+                    <span class="toggle-label">Table View</span>
+                    <div class="toggle-switch" id="view-toggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-label">Column View</span>
+                </div>
+
+                <div class="controls">
+                    <button id="reset-zoom" class="control-btn">Reset View</button>
+                    <button id="theme-toggle" class="control-btn">Light Mode</button>
+                </div>
+            </div>
+
+            <div id="graph-container">
+                <svg id="lineage-graph"></svg>
+                <div id="loading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Analyzing data lineage...</p>
+                </div>
+            </div>
+
+            <!-- Metadata Sidebar -->
+            <div id="metadata-sidebar" class="sidebar">
+                <div class="sidebar-header">
+                    <h3 id="sidebar-title">Table Details</h3>
+                    <button id="close-sidebar" class="close-btn">×</button>
+                </div>
+                <div class="sidebar-content" id="sidebar-content">
+                    <!-- Dynamic content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="sql-parser.js"></script>
+    <script src="graph-renderer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
