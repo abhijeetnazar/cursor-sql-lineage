@@ -1,0 +1,522 @@
+/* CSS Variables for Theme */
+:root {
+    --bg-primary: #0a0e1a;
+    --bg-secondary: #1a1f2e;
+    --bg-tertiary: #2a2f3e;
+    --text-primary: #ffffff;
+    --text-secondary: #b8c5d6;
+    --text-muted: #6b7280;
+    --accent-blue: #00d4ff;
+    --accent-green: #00ff88;
+    --accent-purple: #8b5cf6;
+    --accent-orange: #ff6b35;
+    --border-color: #374151;
+    --glow-blue: rgba(0, 212, 255, 0.3);
+    --glow-green: rgba(0, 255, 136, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #e2e8f0;
+    --text-primary: #1a202c;
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --border-color: #e2e8f0;
+    --glow-blue: rgba(0, 212, 255, 0.2);
+    --glow-green: rgba(0, 255, 136, 0.2);
+    --shadow-dark: rgba(0, 0, 0, 0.1);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Starfield Background */
+.starfield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(2px 2px at 20px 30px, var(--accent-blue), transparent),
+        radial-gradient(2px 2px at 40px 70px, var(--accent-green), transparent),
+        radial-gradient(1px 1px at 90px 40px, var(--accent-purple), transparent),
+        radial-gradient(1px 1px at 130px 80px, var(--accent-orange), transparent),
+        radial-gradient(2px 2px at 160px 30px, var(--accent-blue), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: twinkle 20s linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.3; }
+}
+
+/* Page Management */
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Landing Page Styles */
+#landing-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 800px;
+    padding: 2rem;
+    text-align: center;
+    z-index: 10;
+    position: relative;
+}
+
+.header {
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px var(--glow-blue);
+}
+
+.title-main {
+    display: block;
+}
+
+.title-sub {
+    display: block;
+    font-size: 0.7em;
+    font-weight: 400;
+    margin-top: -0.5rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+/* Query Input Styles */
+.query-input-container {
+    margin-top: 3rem;
+}
+
+.input-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+#sql-query {
+    width: 100%;
+    min-height: 300px;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    resize: vertical;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+#sql-query:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 20px var(--glow-blue);
+}
+
+#sql-query::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.input-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--glow-blue), var(--glow-green));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+#sql-query:focus + .input-glow {
+    opacity: 0.1;
+}
+
+/* Visualize Button */
+.visualize-btn {
+    position: relative;
+    padding: 1rem 3rem;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.visualize-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px var(--glow-blue);
+}
+
+.visualize-btn:active {
+    transform: translateY(0);
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.visualize-btn:hover .btn-glow {
+    left: 100%;
+}
+
+/* Visualization Page */
+#visualization-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.viz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Toggle Switch */
+.view-toggle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.toggle-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: var(--bg-tertiary);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-switch.active {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px var(--shadow-dark);
+}
+
+.toggle-switch.active .toggle-slider {
+    transform: translateX(30px);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 1rem;
+}
+
+.control-btn {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Graph Container */
+#graph-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+#lineage-graph {
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+}
+
+/* Loading Animation */
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 50;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--accent-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Sidebar */
+.sidebar {
+    position: absolute;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200;
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.sidebar-content {
+    padding: 1.5rem;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+}
+
+/* Graph Styles */
+.node {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.node-table {
+    fill: var(--bg-secondary);
+    stroke: var(--accent-blue);
+    stroke-width: 2;
+    filter: drop-shadow(0 4px 12px var(--glow-blue));
+}
+
+.node-table.highlighted {
+    fill: var(--accent-blue);
+    stroke: var(--accent-green);
+    stroke-width: 3;
+    filter: drop-shadow(0 6px 20px var(--glow-blue));
+}
+
+.node-column {
+    fill: var(--bg-tertiary);
+    stroke: var(--accent-green);
+    stroke-width: 1;
+}
+
+.node-column.highlighted {
+    fill: var(--accent-green);
+    stroke: var(--accent-blue);
+    stroke-width: 2;
+}
+
+.node-text {
+    fill: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+}
+
+.link {
+    fill: none;
+    stroke: var(--accent-blue);
+    stroke-width: 2;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.link.highlighted {
+    stroke: var(--accent-green);
+    stroke-width: 3;
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--glow-green));
+}
+
+.link.dimmed {
+    opacity: 0.2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .viz-header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .sidebar {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+}
